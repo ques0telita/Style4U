@@ -28,7 +28,7 @@ form.addEventListener('submit', async (e) => {
     // await pausa la ejecucion asincrona hasta recibir una respuesta 
 
     // si la petición es exitosa (200), redirige automaticamente al usuario a la pantalla de tareas
-    window.location.pathname = '/home/';
+    window.location.pathname = '/';
     } catch (error) {
         console.log(error);
         // extrae el mensaje de error enviado por el servidor ('email o contraseña invalidos') y lo muestra en el HTML

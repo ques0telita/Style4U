@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="../components/cart.js"></script>
     <script src="../components/footer.js"></script>
-    <script src="../components/nav.js"></script>
+    <script type="module" src="index.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/media/S4U-icon.ico">
-    
-    <title>Home</title>
+    <title>Catalog</title>
 </head>
-<body class="bg-cover bg-center" style="background-image: url('media/Gradient.jpg');">
-
-  <nav id="navbar" class="bg-taupe-300 px-4 sm:px-10 py-3 flex items-center justify-between border border-black shadow-md relative">
-      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">
+<body class="bg-white-50">
+    <nav class="bg-taupe-300 px-4 sm:px-10 py-3 flex items-center justify-between border border-black shadow-md">
+  <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">
       <a href="/">Style4U</a>
       </h1>
 
@@ -73,143 +72,223 @@
           </a>
         </div>
       </div>
-    </div>
-  </nav>
-  <!-- PRINCIPAL -->
-  <section>
-    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
-        <div>
-          <div class="max-w-prose md:max-w-none">
-            <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">
-              Seamless Shopping, Elevated Sales.
-              <strong class="text-amber-500"> Experience Commerce</strong>, Refined.
-            </h1>
 
-            <p class="mt-4 text-base text-pretty text-gray-900 sm:text-lg/relaxed">
-              We create intuitive digital experiences designed to engage your visitors and transform casual browsers into loyal customers. Boost your revenue with a store built for performance.
+    </div>
+
+    </nav>
+
+    <section>
+        <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+            <header class="text-center">
+            <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">GET THE LOOK</h2>
+
+            <p class="mx-auto mt-4 max-w-md text-gray-500">
+                Discover the lasted trends in fashion and get inspired by our curated collections.
             </p>
-          </div>
-          <button class="bg-black text-white px-6 py-3 rounded-xl font-bold mt-4 hover:scale-105 transition-all cursor-pointer shadow-lg hover:shadow-xl ">
-            <a href="/signup" class="font-bold">
-              Shop Now!
-            </a>
-          </button>
+            </header>
+
+            <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <li>
+                <a href="#" class="group block overflow-hidden">
+                <img
+                    src="https://static.bershka.net/assets/public/fe59/da96/a3344ce6b68a/5f90e492bc15/02777758809-a4o/02777758809-a4o.jpg?ts=1782211701420&w=750"
+                    alt=""
+                    class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                />
+
+                <div class="relative bg-white pt-3">
+                    <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                    PLAID BLOOMER PANTS
+                    </h3>
+
+                    <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900"> $29.99 </span>
+                    </p>
+                </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="group block overflow-hidden">
+                <img
+                    src="https://static.bershka.net/assets/public/102c/9072/e048478784ff/d1ad60af4eb0/11504864107-a4o/11504864107-a4o.jpg?ts=1781507393772&w=750"
+                    alt=""
+                    class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                />
+
+                <div class="relative bg-white pt-3">
+                    <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                    ANKLE BOOTS WITH STUDS
+                    </h3>
+
+                    <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900"> $49.99 </span>
+                    </p>
+                </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="group block overflow-hidden">
+                <img
+                    src="https://static.bershka.net/assets/public/246e/f646/624c4436b915/9b38201213a6/03788160251-a4o/03788160251-a4o.jpg?ts=1786001995314&w=750"
+                    alt=""
+                    class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                />
+
+                <div class="relative bg-white pt-3">
+                    <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                    KATSEYE PRINT LOG-SLEEVED T-SHIRT
+                    </h3>
+
+                    <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900"> $22.99 </span>
+                    </p>
+                </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="group block overflow-hidden">
+                <img
+                    src="https://static.bershka.net/assets/public/3a77/e421/f0fb4b1d9ae5/fad84a32d016/03531172700-a4o/03531172700-a4o.jpg?ts=1784814593140&w=750"
+                    alt=""
+                    class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                />
+
+                <div class="relative bg-white pt-3">
+                    <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                    BAGGY TROUSERS WITH HANDKERCHIEF
+                    </h3>
+
+                    <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900"> $29.99 </span>
+                    </p>
+                </div>
+                </a>
+            </li>
+            
+            </ul>
+             <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <li>
+                <a href="#" class="group block overflow-hidden">
+                <img
+                    src="https://static.bershka.net/assets/public/731d/26a8/ce98474caaf7/4929fd545d2a/02845741800-a4o/02845741800-a4o.jpg?ts=1783497049349&w=750"
+                    alt=""
+                    class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                />
+
+                <div class="relative bg-white pt-3">
+                    <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                    BERMUDA CULOTTES WITH CROSSOVER BELT
+                    </h3>
+
+                    <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900"> $29.99 </span>
+                    </p>
+                </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="group block overflow-hidden">
+                <img
+                    src="https://static.bershka.net/assets/public/8901/a549/53e0476d923c/52ba12e85338/03059693800-a4o/03059693800-a4o.jpg?ts=1785139606140&w=750"
+                    alt=""
+                    class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                />
+
+                <div class="relative bg-white pt-3">
+                    <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                    ASYMMETRICAL NECK SWEATER
+                    </h3>
+
+                    <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900"> $22.99 </span>
+                    </p>
+                </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="group block overflow-hidden">
+                <img
+                    src="https://static.bershka.net/assets/public/965a/13a1/eac84ed09e97/f48ee04f447d/02871335400-a4o/02871335400-a4o.jpg?ts=1785154131799&w=750"
+                    alt=""
+                    class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                />
+
+                <div class="relative bg-white pt-3">
+                    <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                    LOW-RISE FLARE JEANS WITH EMBROIDERED
+                    </h3>
+
+                    <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900"> $35.99 </span>
+                    </p>
+                </div>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="group block overflow-hidden">
+                <img
+                    src="https://static.bershka.net/assets/public/84ca/f09e/fd474bcbaeff/43a2215f18d6/03381256106-a4o/03381256106-a4o.jpg?ts=1785166491326&w=750"
+                    alt=""
+                    class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                />
+
+                <div class="relative bg-white pt-3">
+                    <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                    THE OFFICE PRINT SHORT-SLEEVED T-SHIRT
+                    </h3>
+
+                    <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900"> $15.99 </span>
+                    </p>
+                </div>
+                </a>
+            </li>
+            </ul>
         </div>
+    </section>
 
-        <div class="w-full h-[450px] overflow-hidden rounded-2xl shadow-2xl">
-          <video 
-            src="https://www.pexels.com/es-es/download/video/18156298/" 
-            class="w-full h-full object-cover"
-            autoplay 
-            loop 
-            muted 
-            playsinline
-          ></video>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FRANJA CATALOGOS -->
-  <div class="bg-taupe-300 w-full min-h-[4rem] mt-8 text-center py-4 px-4 flex items-center justify-center">
-    <h1 class="font-bold text-xl sm:text-3xl tracking-wide">
-      CHECK OUT OUR CATALOGS
-    </h1>
-  </div>
-  <!-- SECCION CATALOGOS -->
-  <div class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-4 sm:px-10 pt-6">
-
-    <!-- WOMAN -->
-    <button class="relative bg-gray-200 rounded-2xl h-[450px] cursor-pointer overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 shadow-lg group">
-      <a href="/catalogWoman" class="block w-full h-full">
-        <img src="media/girl.png" class="w-full h-full object-cover brightness-90 group-hover:scale-105 transition-transform duration-500" alt="Woman Catalog" />
-        <div class="absolute bottom-6 left-6 text-white text-2xl font-bold uppercase drop-shadow-md">
-          <p>WOMAN</p>
-        </div>
-      </a>
-    </button>
-
-    <!-- MAN -->
-    <button class="relative bg-gray-200 rounded-2xl h-[450px] cursor-pointer overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 shadow-lg group">
-      <a href="/catalogMan" class="block w-full h-full">
-        <img src="media/guy.png" class="w-full h-full object-cover brightness-90 group-hover:scale-105 transition-transform duration-500" alt="Man Catalog" />
-        <div class="absolute bottom-6 left-6 text-white text-2xl font-bold uppercase drop-shadow-md">
-          <p>MAN</p>
-        </div>
-      </a>
-    </button>
-
-  </div>
-  <!--FRANJA DE PROMOCION -->
-  <div class="bg-amber-500 w-full h-16 mt-8 text-center py-4">
-      <h1 class="font-bold text-2xl animate-bounce">
-          Find the best deals here!
-      </h1>         
-  </div>
-
-  <!-- CARRUSEL DE FOTOS -->
-  <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scrollbar-hide mt-8 mb-8 mx-3">
-  
-      <!-- Prenda 1 -->
-      <div class="snap-center shrink-0 w-64 md:w-80 group cursor-pointer">
-          <div class="overflow-hidden rounded-2xl bg-gray-100 mb-2">
-          <img 
-              src="https://static.bershka.net/assets/public/ce62/38cc/ffc740d5959a/0b213bc36ea9/01732777800-a4o/01732777800-a4o.jpg?ts=1775054810955&w=750" 
-              alt="Chaqueta Denim" 
-              class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" 
-          />
-          </div>
-          <h3 class="font-semibold text-gray-800">GRAPHIC LEATHER-EFFECT JACKET</h3>
-          <p class="text-black font-bold">$49.99</p>
-      </div>
-
-      <!-- Prenda 2 -->
-      <div class="snap-center shrink-0 w-64 md:w-80 group cursor-pointer">
-          <div class="overflow-hidden rounded-2xl bg-gray-100 mb-2">
-          <img 
-              src="https://static.bershka.net/assets/public/ff3c/6831/d6e946f5acee/4d8825905d38/02579352433-a4o/02579352433-a4o.jpg?ts=1782743917162&w=750" 
-              alt="Camiseta Algodón" 
-              class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" 
-          />
-          </div>
-          <h3 class="font-semibold text-gray-800">SIDE PRINT BAGGY JEANS</h3>
-          <div class="flex gap-3">
-          <p class="text-black font-bold">$35.00</p> <span class="bg-red-400 text-gray-500 line-through">$39.99</span>
-          </div>
-      </div>
-
-      <!-- Prenda 3 -->
-      <div class="snap-center shrink-0 w-64 md:w-80 group cursor-pointer">
-          <div class="overflow-hidden rounded-2xl bg-gray-100 mb-2">
-          <img 
-              src="https://static.bershka.net/assets/public/5b97/e9ef/5cbd4645b4f0/3c16765ee1bd/02116677800-a4o/02116677800-a4o.jpg?ts=1779786517062&w=750" 
-              alt="Pantalón Cargo" 
-              class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" 
-          />
-          </div>
-          <h3 class="font-semibold text-gray-800">BOXY LEATHER-EFFECT JACKET</h3>
-          <p class="text-black font-bold">$39.00</p>
-      </div>
-
-      <!-- Prenda 4 -->
-     <div class="snap-center shrink-0 w-64 md:w-80 group cursor-pointer">
-          <div class="overflow-hidden rounded-2xl bg-gray-100 mb-2">
-          <img 
-              src="https://static.bershka.net/assets/public/9c9b/ff56/c5c146e584ec/3add83ad02d5/02924443606-a4o/02924443606-a4o.jpg?ts=1784205756308&w=750" 
-              alt="Pantalón Cargo" 
-              class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" 
-          />
-          </div>
-          <h3 class="font-semibold text-gray-800"> SHORT-SLEEVED POLO SHIRT</h3>
-          <p class="text-black font-bold">$17.99</p>
-      </div>
-  </div>
-
-  <footer id="page-footer" class="bg-black lg:grid lg:grid-cols-5 mt-8">
-    <div class="relative block h-32 lg:col-span-2 lg:h-full">
+    <footer id="page-footer" class="bg-black lg:grid lg:grid-cols-5 mt-8">
+        <div class="relative block h-32 lg:col-span-2 lg:h-full">
       <img
-        src="media/LogoStyle4U.svg"
+        src="/media/LogoStyle4U.svg"
         alt=""
         class="absolute inset-0 h-full w-full object-cover"
       />
@@ -423,6 +502,6 @@
         </div>
       </div>
     </div>
-  </footer>
+    </footer>
 </body>
 </html>
