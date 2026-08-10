@@ -221,8 +221,4 @@ const createPageFooter = () => {
     `;
 };
 
-const isHome = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
-
-if (isHome && pageFooter) {
-  createPageFooter();
-}
+createPageFooter();

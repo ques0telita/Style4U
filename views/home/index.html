@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../components/cart.js"></script>
+    <script src="../components/profile.js"></script>
     <script src="../components/footer.js"></script>
-    <script src="../components/nav.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/media/S4U-icon.ico">
     
     <title>Home</title>
@@ -14,10 +15,7 @@
 <body class="bg-cover bg-center" style="background-image: url('media/Gradient.jpg');">
 
   <nav id="navbar" class="bg-taupe-300 px-4 sm:px-10 py-3 flex items-center justify-between border border-black shadow-md relative">
-      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">
-      <a href="/">Style4U</a>
-      </h1>
-
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Style4U</h1>
     <search class="flex items-center space-x-2 sm:space-x-4">
       <input
         type="text"
@@ -32,7 +30,11 @@
       <!-- CONTENEDOR CARRITO -->
       <div class="relative">
         <button id="cart-btn" class="bg-black text-white px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg flex items-center gap-1 text-xs sm:text-sm font-medium cursor-pointer hover:bg-gray-800 transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          <svg class="w-4 h-4" 
+          fill="none" stroke="currentColor" 
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
           <span class="hidden xs:inline">Shopping</span> Cart
         </button>
 
@@ -45,7 +47,7 @@
             <p class="text-xs sm:text-sm text-gray-500 text-center py-4">Your cart is empty.</p>
           </div>
 
-          <!-- Footer -->
+          <!-- Footer Ventana-->
           <div class="border-t pt-3 mt-3 flex justify-between items-center text-xs sm:text-sm font-bold">
             <span>Total:</span>
             <span class="text-emerald-600">$0.00</span>

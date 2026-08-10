@@ -21,7 +21,7 @@ async function validateEmail(email) {
 
         // 2. Opcional: Filtrar si el correo es totalmente inválido a nivel SMTP/Formato
         if (data.email_deliverability && data.email_deliverability.status === 'undeliverable') {
-            return { valid: false, error: 'El correo ingresado no existe.' };
+            return { valid: false, error: 'The email does not exist.' };
         }
 
         return { valid: true };

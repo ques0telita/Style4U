@@ -15,6 +15,9 @@ const logoutRouter = require('./controllers/logout');
 // const productsRouter = require('./controllers/products');
 const { userExtractor } = require('./middleware/auth');
 
+// ==========================================
+// CONEXION A LA BASE DE DATOS
+// ==========================================
 (async () => {
    
     try {

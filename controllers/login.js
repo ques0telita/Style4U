@@ -1,62 +1,50 @@
-// IMPORTACIONES
-const loginRouter = require('express').Router(); // importa el framework "express" y crea un enrutador para manejar las rutas de login
-const User = require('../models/user'); // importa el modelo de usuario para poder hacer consultas en la base de datos
-const bcrypt = require('bcrypt'); // importa "bcrypt" para comparar las contraseñas de forma segura (encriptadas)
-const jwt = require('jsonwebtoken'); // importa "jsonwebtoken" para crear tokens de acceso (JWT) firmados
-const { request } = require('../app'); // extrae el objeto "request" del archivo app (si es necesario para la app)
+const loginRouter = require('express').Router();
+const User = require('../models/user');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-// RUTA POST PARA EL LOG IN
-// define una ruta "post" en la raíz ('/') que maneja peticiones asincronas (async/await)
+// Ruta para procesar el inicio de sesión
 loginRouter.post('/', async (req, res) => {
-
-    // extrae el email y el password que el usuario envió desde el formulario/cliente
+  try {
     const { email, password } = req.body;
 
-    // busca en la base de datos un usuario que coincida con el email ingresado
+    // 1. Buscamos si el correo existe en la base de datos
     const userExist = await User.findOne({ email });
-
-    // Si el usuario NO existe (findOne devuelve null), detiene la ejecución y responde con error 400
     if (!userExist) {
-        return res.status(400).json({ error: 'email o contraseña invalidos' });
+      return res.status(400).json({ error: 'Invalid email or password' });
     }
-    // si el usuario existe pero aun no ha verificado su cuenta/email, detiene el flujo y lanza error
-    if (!userExist.verified) {
-        return res.status(400).json({ error: 'email no verificado' });
-    }
-    // compara la contraseña en texto plano con la contraseña encriptada (hash) guardada en la base de datos
+
+    // 2. Comparamos la contraseña ingresada con la contraseña encriptada (hash)
     const isCorrect = await bcrypt.compare(password, userExist.passwordHash);
-
-    // si las contraseñas NO coinciden, detiene la ejecucion y responde con error 400
-    // posdata: se usa el mismo mensaje que arriba por seguridad (para no dar pistas a atacantes)
     if (!isCorrect) {
-        return res.status(400).json({ error: 'email o contrasena invalidos' });
+      return res.status(400).json({ error: 'Invalid email or password' });
     }
 
-    // CREACION Y FIRMA DEL TOKEN (JWT)
-    // define los datos del usuario que queremos guardar dentro del token (en este caso su ID)
+    // 3. Creamos la información que guarda en el token (payload)
     const userForToken = {
-        id: userExist.id,
-    }
-    // genera y firma el JWT usando los datos del usuario, una clave secreta del servidor y expira en 1 día
-    const accessToken = jwt.sign(userForToken, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '1d'
+      id: userExist._id
+    };
+
+    // 4. Firmamos el token con la clave secreta
+    const accessToken = jwt.sign(
+      userForToken, 
+      process.env.ACCESS_TOKEN_SECRET || 'secreto_temporal', 
+      { expiresIn: '1d' }
+    );
+
+    // 5. Guardamos el token en una cookie del navegador
+    res.cookie('accessToken', accessToken, {
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24), // expira en 1 día 
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true // seguridad para que no sea leída por JS en el navegador
     });
 
-    // RESPUESTA AL CLIENTE (COOKIE)
-    // guarda el token generado en una cookie del navegador llamada 'accessToken'
-    res.cookie('acces_token', accessToken, {
-        // establece la fecha de expiracion de la cookie para dentro de 24 horas (en milisegundoss)
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    return res.status(200).json({ message: 'Success' });
 
-        // esto es seguridad... si esta en produccion, obliga a que la cookie viaje a traves de conexiones seguras HTTPS
-        secure: process.env.NODE_ENV === 'production',
-
-        // otra cosita de seguridad... Evita que el codigo JS del cliente (como scripts maliciosos XSS) pueda acceder a la cookie
-        httpOnly: true
-    });
-    // envia un estado HTTP 200 al cliente para avisar que el inicio de sesion fue exitoso
-    return res.sendStatus(200);
-
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 });
-// exporta el enrutador
+
 module.exports = loginRouter;

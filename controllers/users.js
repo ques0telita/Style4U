@@ -12,13 +12,13 @@ usersRouter.post("/", async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
-    return res.status(400).json({ error: "Faltan campos obligatorios" });
+    return res.status(400).json({ error: "Missing required fields." });
   }
 
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
-    return res.status(400).json({ error: "El correo ya está registrado" });
+    return res.status(400).json({ error: "The email has already been registered." });
   }
 
   // Variable de control para el estado de verificación
@@ -52,7 +52,7 @@ usersRouter.post("/", async (req, res) => {
   const savedUser = await newUser.save();
 
   if (savedUser.verified) {
-    return res.status(201).json({ message: "Usuario creado y verificado exitosamente" });
+    return res.status(201).json({ message: "User created and verified successfully." });
   }
 
   // RESPALDO: Enviar correo de verificación si la API no lo verificó automáticamente
@@ -65,10 +65,10 @@ usersRouter.post("/", async (req, res) => {
   try {
     const info = await sendVerificationEmail(savedUser.email, savedUser.id, token);
     console.log("Message sent: %s", info.messageId);
-    return res.status(201).json("Usuario creado, verifica tu correo");
+    return res.status(201).json("User created, verify your email.");
   } catch (err) {
     console.error("Error while sending mail:", err);
-    return res.status(201).json("Usuario creado, pero hubo un problema al enviar el correo de verificación.");
+    return res.status(201).json("User created, but failed to send verification email. Please contact support.");
   }
 });
 
@@ -80,7 +80,7 @@ usersRouter.patch("/:id/:token", async (req, res) => {
     const id = decodedToken.id;
 
     await User.findByIdAndUpdate(id, { verified: true });
-    return res.status(200).json("Correo verificado correctamente");
+    return res.status(200).json("Successfully verified email");
   } catch (error) {
     const id = req.params.id;
     const { email } = await User.findById(id);
@@ -93,8 +93,35 @@ usersRouter.patch("/:id/:token", async (req, res) => {
 
     await sendVerificationEmail(email, id, token);
 
-    return res.status(400).json({ error: "Token inválido o expirado. Se ha enviado un nuevo correo de verificación." });
+    return res.status(400).json({ error: "Invalid or expired token. A new verification email has been sent." });
   }
 });
 
+// Ruta /api/users/me para validar la cookie activa
+usersRouter.get('/me', async (req, res) => {
+  try {
+    // Leemos la cookie llamada accessToken
+    const token = req.cookies.accessToken;
+
+    if (!token) {
+      return res.status(401).json({ error: 'No hay token provisto' });
+    }
+
+    // Verificamos el token con la clave secreta
+    const decodedToken = jwt.verify(
+      token, 
+      process.env.ACCESS_TOKEN_SECRET || 'secreto_temporal'
+    );
+
+    const user = await User.findById(decodedToken.id);
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    return res.json({ email: user.email, name: user.name });
+
+  } catch (error) {
+    return res.status(401).json({ error: 'Token inválido o expirado' });
+  }
+});
 module.exports = usersRouter;
