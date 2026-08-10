@@ -69,4 +69,10 @@ app.use((req, res, next) => {
   next();
 });
 
+
+///////////////////////////
+// INICIAMOS SERVIDOR
+///////////////////////////
+console.log(`Servidor corriendo en ${PAGE_URL}`);
+
 module.exports = app;
