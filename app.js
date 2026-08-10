@@ -13,6 +13,8 @@ const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 const logoutRouter = require('./controllers/logout');
 // const productsRouter = require('./controllers/products');
+const { PAGE_URL } = require('./config');
+const { MONGO_URI } = require('./config');
 const { userExtractor } = require('./middleware/auth');
 
 // ==========================================
