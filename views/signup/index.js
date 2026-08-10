@@ -76,9 +76,9 @@ form.addEventListener("submit", async (e) => {
   // Desactivar el botón inmediatamente para evitar doble clic
   formBtn.disabled = true;
   const originalBtnText = formBtn.innerHTML;
-  formBtn.innerHTML = "Procesando..."; 
+  formBtn.innerHTML = "Sending..."; 
 
-  console.log("Enviando formulario...");
+  console.log("Sending form...");
   
   try {
     const newUser = {
@@ -93,9 +93,9 @@ form.addEventListener("submit", async (e) => {
 
     // --- EVALUAMOS LA REDIRECCIÓN DE FORMA CORRECTA ---
     // Como data ahora contiene el objeto { message: "..." }, revisamos data.message
-    if (data && data.message === "Usuario creado y verificado exitosamente") {
+    if (data && data.message === "User created successfuly.") {
       
-      createNotification(false, "¡Cuenta verificada automáticamente!");
+      createNotification(false, "Your account has been verified!");
       
       // Esperamos un momento breve para que el usuario logre leer la notificación antes de irse
       setTimeout(() => {

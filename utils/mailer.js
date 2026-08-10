@@ -16,8 +16,8 @@ const sendVerificationEmail = async (toEmail, userId, token) => {
   return await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: toEmail,
-    subject: "Verificación de correo",
-    html: `<a href="${PAGE_URL}/verify/${userId}/${token}">Verificar Correo</a>`,
+    subject: "Verification in StyleU",
+    html: `<a href="${PAGE_URL}/verify/${userId}/${token}">Verify your email.</a>`,
   });
 };
 
