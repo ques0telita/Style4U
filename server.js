@@ -11,7 +11,7 @@ dns.setServers(['1.1.1.1', '8.8.8.8']); // Cloudflare y Google DNS
 
 require('dotenv').config();
 const app = require('./app');
-const PORT = 3005;
+const PORT = process.env.PORT || 3005;
 
 app.listen(PORT, () => {
     console.log(`Server listening in port: ${PORT}`);
