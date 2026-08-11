@@ -18,8 +18,10 @@ form.addEventListener('submit', async (e) => {
       password: passwordInput.value
     };
 
-    // Enviamos la petición POST con Axios
-    await axios.post('/api/login', user);
+    // 👈 AQUÍ: Agregamos { withCredentials: true } para aceptar las cookies de la respuesta
+    await axios.post('/api/login', user, {
+      withCredentials: true
+    });
 
     // Si la respuesta es exitosa (200), redirigimos al Home
     window.location.pathname = '/';
@@ -37,4 +39,3 @@ form.addEventListener('submit', async (e) => {
     }
   }
 });
-

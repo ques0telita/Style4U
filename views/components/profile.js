@@ -24,9 +24,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           try {
             // Llamamos a la API para borrar la cookie
             await axios.get("/api/logout", { withCredentials: true });
-            
-            // Redirigimos al usuario al login
-            window.location.href = "/login/";
+
+            // Limpiar carrito en localStorage para garantizar estado "deslogueado"
+            try {
+              localStorage.removeItem("style4u_cart");
+            } catch (storageErr) {
+              console.warn("No se pudo limpiar el localStorage:", storageErr);
+            }
+
+            // Recargamos la página para que la UI (carrito, botones) refleje el estado deslogueado
+            window.location.reload();
           } catch (err) {
             console.error("Error al intentar cerrar sesión:", err);
           }

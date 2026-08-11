@@ -1,10 +1,16 @@
-const pageFooter = document.querySelector('#pagefooter');
-
 const createPageFooter = () => {
-    pageFooter.innerHTML = `
-        <div class="relative block h-32 lg:col-span-2 lg:h-full">
+  const footer = document.querySelector('#footer');
+
+  // Guardias de seguridad para evitar que la página se rompa si no encuentra el footer
+  if (!footer) {
+    console.error('No se encontró el elemento #footer en el DOM.');
+    return;
+  }
+
+  footer.innerHTML = `
+    <div class="relative block h-32 lg:col-span-2 lg:h-full">
       <img
-        src="media/LogoStyle4U.svg"
+        src="/media/LogoStyle4U.svg"
         alt=""
         class="absolute inset-0 h-full w-full object-cover"
       />
@@ -218,7 +224,8 @@ const createPageFooter = () => {
         </div>
       </div>
     </div>
-    `;
+  `;
 };
 
-createPageFooter();
+// Esperar a que todo el HTML esté cargado en el navegador antes de ejecutar
+document.addEventListener('DOMContentLoaded', createPageFooter);

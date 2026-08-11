@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
-//modelos o esquemas de la base de datos
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   passwordHash: String,
-  verified: { 
-    type: Boolean, 
-    default: false 
+  verified: {
+    type: Boolean,
+    default: false
   },
-  todo: [{
-    type : mongoose.Schema.Types.ObjectId,
-    ref: "Todo",
-  }]
+  //  Guardas la referencia al carrito del usuario:
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "UserCart"
+  }
 });
 
 userSchema.set("toJSON", {
