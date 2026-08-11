@@ -12,7 +12,7 @@ const morgan = require('morgan');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 const logoutRouter = require('./controllers/logout');
-// const productsRouter = require('./controllers/products');
+// const checkoutRouter = require('./controllers/checkout');
 const { PAGE_URL } = require('./config');
 const { MONGO_URI } = require('./config');
 const { userExtractor } = require('./middleware/auth');
@@ -47,6 +47,7 @@ app.use('/catalogMan', express.static(path.resolve('views', 'catalogMan')));
 app.use('/catalogWoman', express.static(path.resolve('views', 'catalogWoman')));
 app.use('/signup', express.static(path.resolve('views', 'signup')));
 app.use('/login', express.static(path.resolve('views', 'login')));
+app.use('/cheackout', express.static(path.resolve('views', 'checkout')));
 app.use('/media', express.static(path.resolve('views', 'media')));
 app.use('/components', express.static(path.resolve('views', 'components')));
 app.use('/verify/:id/:token', express.static(path.resolve('views', 'verify')));
@@ -56,7 +57,7 @@ app.use('/verify/:id/:token', express.static(path.resolve('views', 'verify')));
 // ==========================================
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
-// app.use('/api/products', productsRouter);
+// app.use('/api/products', checkoutRouter);
 app.use('/api/logout', logoutRouter);
 
 //============================================

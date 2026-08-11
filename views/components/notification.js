@@ -1,6 +1,5 @@
 const div = document.querySelector('#notification');
 
-
 export const createNotification = (isError, message) => {
     if (isError) {
         div.innerHTML = `

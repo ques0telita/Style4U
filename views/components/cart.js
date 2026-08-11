@@ -1,249 +1,3 @@
-// const cartBtn = document.querySelector('#cart-btn');
-// let cartBtn = null;
-
-// cartBtn.addEventListener('click', () => {
-//     if (cartBtn && !cartBtn.closed) {
-//         cartBtn.focus();
-//     } else {
-//         createCartWindow();
-//     }
-// });
-
-// const createCartWindow = () => {
-//     cartBtn = window.open('/cart', 'Cart', 'width=400,height=600');
-//     cartBtn.innerHTML = `
-//     <html>
-//     <div
-//         class="relative w-screen max-w-sm border border-gray-300 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8"
-//         aria-modal="true"
-//         role="dialog"
-//         aria-label="Shopping cart"
-//         tabindex="-1"
-//         >
-//         <button class="absolute inset-e-4 top-4 text-gray-600 transition hover:scale-110">
-//             <span class="sr-only">Close cart</span>
-
-//             <svg
-//             aria-hidden="true"
-//             xmlns="http://www.w3.org/2000/svg"
-//             fill="none"
-//             viewBox="0 0 24 24"
-//             stroke-width="1.5"
-//             stroke="currentColor"
-//             class="size-5"
-//             >
-//             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-//             </svg>
-//         </button>
-
-//         <div class="mt-4 space-y-6">
-//             <ul class="space-y-4">
-//             <li class="flex items-center gap-4">
-//                 <img
-//                 src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&q=80&w=1160"
-//                 alt=""
-//                 class="size-16 rounded-sm object-cover"
-//                 />
-
-//                 <div>
-//                 <h3 class="text-sm text-gray-900">Basic Tee 6-Pack</h3>
-
-//                 <dl class="mt-0.5 space-y-px text-[10px] text-gray-600">
-//                     <div>
-//                     <dt class="inline">Size:</dt>
-//                     <dd class="inline">XXS</dd>
-//                     </div>
-
-//                     <div>
-//                     <dt class="inline">Color:</dt>
-//                     <dd class="inline">White</dd>
-//                     </div>
-//                 </dl>
-//                 </div>
-
-//                 <div class="flex flex-1 items-center justify-end gap-2">
-//                 <form>
-//                     <label for="Line1Qty" class="sr-only"> Quantity </label>
-
-//                     <input
-//                     type="number"
-//                     min="1"
-//                     value="1"
-//                     id="Line1Qty"
-//                     class="h-8 w-12 rounded-sm border-gray-300 bg-white p-0 text-center text-xs text-gray-700 [-moz-appearance:textfield] focus:outline-hidden [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-//                     />
-//                 </form>
-
-//                 <button class="text-gray-600 transition hover:text-red-600">
-//                     <span class="sr-only">Remove item</span>
-
-//                     <svg
-//                     aria-hidden="true"
-//                     xmlns="http://www.w3.org/2000/svg"
-//                     fill="none"
-//                     viewBox="0 0 24 24"
-//                     stroke-width="1.5"
-//                     stroke="currentColor"
-//                     class="size-4"
-//                     >
-//                     <path
-//                         stroke-linecap="round"
-//                         stroke-linejoin="round"
-//                         d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-//                     />
-//                     </svg>
-//                 </button>
-//                 </div>
-//             </li>
-
-//             <li class="flex items-center gap-4">
-//                 <img
-//                 src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&q=80&w=1160"
-//                 alt=""
-//                 class="size-16 rounded-sm object-cover"
-//                 />
-
-//                 <div>
-//                 <h3 class="text-sm text-gray-900">Basic Tee 6-Pack</h3>
-
-//                 <dl class="mt-0.5 space-y-px text-[10px] text-gray-600">
-//                     <div>
-//                     <dt class="inline">Size:</dt>
-//                     <dd class="inline">XXS</dd>
-//                     </div>
-
-//                     <div>
-//                     <dt class="inline">Color:</dt>
-//                     <dd class="inline">White</dd>
-//                     </div>
-//                 </dl>
-//                 </div>
-
-//                 <div class="flex flex-1 items-center justify-end gap-2">
-//                 <form>
-//                     <label for="Line2Qty" class="sr-only"> Quantity </label>
-
-//                     <input
-//                     type="number"
-//                     min="1"
-//                     value="1"
-//                     id="Line2Qty"
-//                     class="h-8 w-12 rounded-sm border-gray-300 bg-white p-0 text-center text-xs text-gray-700 [-moz-appearance:textfield] focus:outline-hidden [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-//                     />
-//                 </form>
-
-//                 <button class="text-gray-600 transition hover:text-red-600">
-//                     <span class="sr-only">Remove item</span>
-
-//                     <svg
-//                     aria-hidden="true"
-//                     xmlns="http://www.w3.org/2000/svg"
-//                     fill="none"
-//                     viewBox="0 0 24 24"
-//                     stroke-width="1.5"
-//                     stroke="currentColor"
-//                     class="size-4"
-//                     >
-//                     <path
-//                         stroke-linecap="round"
-//                         stroke-linejoin="round"
-//                         d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-//                     />
-//                     </svg>
-//                 </button>
-//                 </div>
-//             </li>
-
-//             <li class="flex items-center gap-4">
-//                 <img
-//                 src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&q=80&w=1160"
-//                 alt=""
-//                 class="size-16 rounded-sm object-cover"
-//                 />
-
-//                 <div>
-//                 <h3 class="text-sm text-gray-900">Basic Tee 6-Pack</h3>
-
-//                 <dl class="mt-0.5 space-y-px text-[10px] text-gray-600">
-//                     <div>
-//                     <dt class="inline">Size:</dt>
-//                     <dd class="inline">XXS</dd>
-//                     </div>
-
-//                     <div>
-//                     <dt class="inline">Color:</dt>
-//                     <dd class="inline">White</dd>
-//                     </div>
-//                 </dl>
-//                 </div>
-
-//                 <div class="flex flex-1 items-center justify-end gap-2">
-//                 <form>
-//                     <label for="Line3Qty" class="sr-only"> Quantity </label>
-
-//                     <input
-//                     type="number"
-//                     min="1"
-//                     value="2"
-//                     id="Line3Qty"
-//                     class="h-8 w-12 rounded-sm border-gray-300 bg-white p-0 text-center text-xs text-gray-700 [-moz-appearance:textfield] focus:outline-hidden [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-//                     />
-//                 </form>
-
-//                 <button class="text-gray-600 transition hover:text-red-600">
-//                     <span class="sr-only">Remove item</span>
-
-//                     <svg
-//                     aria-hidden="true"
-//                     xmlns="http://www.w3.org/2000/svg"
-//                     fill="none"
-//                     viewBox="0 0 24 24"
-//                     stroke-width="1.5"
-//                     stroke="currentColor"
-//                     class="size-4"
-//                     >
-//                     <path
-//                         stroke-linecap="round"
-//                         stroke-linejoin="round"
-//                         d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-//                     />
-//                     </svg>
-//                 </button>
-//                 </div>
-//             </li>
-//             </ul>
-
-//             <div class="space-y-4 text-center">
-//             <a
-//                 href="#"
-//                 class="block rounded-sm border border-gray-300 bg-gray-50 px-5 py-3 text-sm text-gray-700 transition-colors hover:text-gray-900"
-//             >
-//                 View my cart (2)
-//             </a>
-
-//             <a
-//                 href="#"
-//                 class="block rounded-sm border border-blue-600 bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-blue-700 hover:bg-blue-700"
-//             >
-//                 Checkout
-//             </a>
-
-//             <a
-//                 href="#"
-//                 class="inline-block text-sm text-gray-600 underline underline-offset-4 transition-colors hover:text-gray-700"
-//             >
-//                 Continue shopping
-//             </a>
-//             </div>
-//         </div>
-//         </div>
-//     </html>
-//     `;
-// };
-// createCartWindow();
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 document.addEventListener("DOMContentLoaded", () => {
   // Referencias a los elementos
   const cartBtn = document.getElementById("cart-btn");
@@ -251,40 +5,190 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileBtn = document.getElementById("profile-btn");
   const profileDropdown = document.getElementById("profile-dropdown");
 
-  // 1. Abrir/Cerrar Carrito
+  // Referencias internas del carrito
+  const cartItemsContainer = document.getElementById("cart-items");
+  const cartTotal = document.getElementById("cart-total");
+
+  // Referencias del Modal
+  const productModal = document.getElementById("product-modal");
+  const closeModalBtn = document.getElementById("close-modal-btn");
+  const modalImg = document.getElementById("modal-img");
+  const modalTitle = document.getElementById("modal-title");
+  const modalPrice = document.getElementById("modal-price");
+  const modalDescription = document.getElementById("modal-description");
+  const addToCartBtn = document.getElementById("add-to-cart-btn");
+
+  const prevImgBtn = document.getElementById("prev-img-btn");
+  const nextImgBtn = document.getElementById("next-img-btn");
+
+  // 💾 ESTADO PERSISTENTE: Cargar del localStorage si existe
+  let cart = JSON.parse(localStorage.getItem("style4u_cart")) || [];
+  let currentImages = [];
+  let currentImageIndex = 0;
+  let selectedSize = "S";
+  let currentProductData = {};
+
+  // Función auxiliar para guardar en LocalStorage
+  function saveCart() {
+    localStorage.setItem("style4u_cart", JSON.stringify(cart));
+  }
+
+  // 1. Abrir/Cerrar Carrito y Perfil
   if (cartBtn && cartDropdown) {
     cartBtn.addEventListener("click", (e) => {
-      e.stopPropagation(); // evita que el evento se propague al document
-      
-      // si esta abierto el carrito, se cierra la ventana perfil
+      e.stopPropagation();
       if (profileDropdown) profileDropdown.classList.add("hidden");
-      
-      // alternar la clase 'hidden'
       cartDropdown.classList.toggle("hidden");
     });
   }
 
-  // abrir/cerrar Perfil
   if (profileBtn && profileDropdown) {
     profileBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      
-      // si abrimos el perfil, cerramos el carrito
       if (cartDropdown) cartDropdown.classList.add("hidden");
-      
       profileDropdown.classList.toggle("hidden");
     });
   }
 
-  // 3. CERRAR MENÚS AL HACER CLIC FUERA
   document.addEventListener("click", (e) => {
     if (cartDropdown && !cartDropdown.contains(e.target) && e.target !== cartBtn) {
       cartDropdown.classList.add("hidden");
     }
-    
     if (profileDropdown && !profileDropdown.contains(e.target) && e.target !== profileBtn) {
       profileDropdown.classList.add("hidden");
     }
   });
-});
 
+  // 2. Modal de Producto
+  const productCards = document.querySelectorAll(".product-card");
+
+  productCards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const title = card.dataset.title || "Product";
+      const price = card.dataset.price || "$0.00";
+      const frontImg = card.dataset.image;
+      const backImg = card.dataset.imageBack || frontImg;
+      const description = card.dataset.description || "No description available.";
+
+      currentProductData = { title, price, frontImg };
+      currentImages = [frontImg, backImg];
+      currentImageIndex = 0;
+
+      if (modalImg) modalImg.src = currentImages[currentImageIndex];
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalPrice) modalPrice.textContent = price;
+      if (modalDescription) modalDescription.textContent = description;
+
+      setupSizeSelectors();
+
+      if (productModal) productModal.classList.remove("hidden");
+    });
+  });
+
+  const toggleImage = () => {
+    if (currentImages.length <= 1) return;
+    currentImageIndex = currentImageIndex === 0 ? 1 : 0;
+    if (modalImg) modalImg.src = currentImages[currentImageIndex];
+  };
+
+  if (prevImgBtn) prevImgBtn.addEventListener("click", toggleImage);
+  if (nextImgBtn) nextImgBtn.addEventListener("click", toggleImage);
+
+  function setupSizeSelectors() {
+    if (!productModal) return;
+    const sizeButtons = Array.from(productModal.querySelectorAll("button")).filter(btn => 
+      ["S", "M", "L", "XL"].includes(btn.textContent.trim())
+    );
+
+    sizeButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        sizeButtons.forEach(b => b.classList.remove("bg-black", "text-white"));
+        btn.classList.add("bg-black", "text-white");
+        selectedSize = btn.textContent.trim();
+      });
+    });
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", () => productModal.classList.add("hidden"));
+  }
+
+  // 3. Agregar al Carrito
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener("click", () => {
+      const existingIndex = cart.findIndex(
+        item => item.title === currentProductData.title && item.size === selectedSize
+      );
+
+      if (existingIndex > -1) {
+        cart[existingIndex].quantity += 1;
+      } else {
+        cart.push({
+          title: currentProductData.title,
+          price: currentProductData.price,
+          image: currentProductData.frontImg,
+          size: selectedSize,
+          quantity: 1
+        });
+      }
+
+      saveCart(); // 👈 Guardamos el cambio
+      updateCartUI();
+
+      if (productModal) productModal.classList.add("hidden");
+      if (cartDropdown) cartDropdown.classList.remove("hidden");
+    });
+  }
+
+  // 4. Renderizar Carrito
+  function updateCartUI() {
+    if (!cartItemsContainer) return;
+
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = `<p class="text-xs sm:text-sm text-gray-500 text-center py-4">Your cart is empty.</p>`;
+      if (cartTotal) cartTotal.textContent = "$0.00";
+      return;
+    }
+
+    cartItemsContainer.innerHTML = cart.map((item, index) => `
+      <div class="flex items-center gap-3 border-b border-gray-100 pb-2">
+        <img src="${item.image}" alt="${item.title}" class="size-12 rounded-lg object-cover" />
+
+        <div class="flex-1 min-w-0">
+          <h4 class="text-xs font-bold text-gray-900 truncate">${item.title}</h4>
+          <p class="text-[11px] text-gray-500">Size: <span class="font-semibold text-gray-700">${item.size}</span> | ${item.price}</p>
+          <p class="text-[11px] text-gray-700 font-medium">Qty: ${item.quantity}</p>
+        </div>
+
+        <button data-index="${index}" class="remove-cart-item text-gray-400 hover:text-red-500 transition-colors p-1">
+          <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+          </svg>
+        </button>
+      </div>
+    `).join('');
+
+    const total = cart.reduce((sum, item) => {
+      const numPrice = parseFloat(item.price.replace("$", "")) || 0;
+      return sum + (numPrice * item.quantity);
+    }, 0);
+
+    if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
+
+    // Escuchar eliminar ítems
+    const removeBtns = cartItemsContainer.querySelectorAll(".remove-cart-item");
+    removeBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const index = e.currentTarget.dataset.index;
+        cart.splice(index, 1);
+        saveCart(); // 👈 Actualizamos el storage al eliminar
+        updateCartUI();
+      });
+    });
+  }
+
+  // 🚀 CARGA INICIAL: Dibujar los productos guardados al abrir la página
+  updateCartUI();
+});

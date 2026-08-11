@@ -1,4 +1,4 @@
-const pageFooter = document.querySelector('#page-footer');
+const pageFooter = document.querySelector('#pagefooter');
 
 const createPageFooter = () => {
     pageFooter.innerHTML = `

@@ -13,8 +13,10 @@
     <title>Catalog</title>
 </head>
 <body class="bg-white-50">
+  
+  <!-- NAVBAR -->
   <nav class="bg-taupe-300 px-4 sm:px-10 py-3 flex items-center justify-between border border-black shadow-md">
-<h1 class="text-2xl sm:text-3xl font-bold tracking-tight">
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">
     <a href="/">Style4U</a>
     </h1>
 
@@ -30,31 +32,31 @@
   <div class="flex items-center space-x-2 sm:space-x-4">
     
     <!-- CONTENEDOR CARRITO -->
-    <div class="relative">
-      <button id="cart-btn" class="bg-black text-white px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg flex items-center gap-1 text-xs sm:text-sm font-medium cursor-pointer hover:bg-gray-800 transition-colors">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-        <span class="hidden xs:inline">Shopping</span> Cart
-      </button>
-
-      <!-- VENTANA DESPLEGABLE DEL CARRITO -->
-      <div id="cart-dropdown" class="hidden absolute right-0 mt-2 w-72 sm:w-80 bg-white border border-black rounded-xl shadow-2xl p-4 z-50">
-        <h3 class="font-bold text-gray-900 border-b pb-2 mb-3 text-sm sm:text-base">Shopping Cart</h3>
-        
-        <!-- Lista de productos -->
-        <div id="cart-items" class="space-y-3 max-h-60 overflow-y-auto">
-          <p class="text-xs sm:text-sm text-gray-500 text-center py-4">Your cart is empty.</p>
-        </div>
-
-        <!-- Footer -->
-        <div class="border-t pt-3 mt-3 flex justify-between items-center text-xs sm:text-sm font-bold">
-          <span>Total:</span>
-          <span class="text-emerald-600">$0.00</span>
-        </div>
-        <button class="w-full mt-3 bg-black text-white py-2 rounded-lg text-xs sm:text-sm font-bold hover:bg-gray-800 transition-colors">
-          Checkout
+      <div class="relative">
+        <button id="cart-btn" class="bg-black text-white px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg flex items-center gap-1 text-xs sm:text-sm font-medium cursor-pointer hover:bg-gray-800 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          <span class="hidden xs:inline">Shopping</span> Cart
         </button>
+
+        <!-- VENTANA DESPLEGABLE DEL CARRITO -->
+        <div id="cart-dropdown" class="hidden absolute right-0 mt-2 w-72 sm:w-80 bg-white border border-black rounded-xl shadow-2xl p-4 z-50">
+          <h3 class="font-bold text-gray-900 border-b pb-2 mb-3 text-sm sm:text-base">Shopping Cart</h3>
+          
+          <!-- Lista de productos -->
+          <div id="cart-items" class="space-y-3 max-h-60 overflow-y-auto">
+            <p class="text-xs sm:text-sm text-gray-500 text-center py-4">Your cart is empty.</p>
+          </div>
+
+          <!-- Footer -->
+          <div class="border-t pt-3 mt-3 flex justify-between items-center text-xs sm:text-sm font-bold">
+            <span>Total:</span>
+            <span id="cart-total" class="text-emerald-600">$0.00</span>
+          </div>
+          <button class="w-full mt-3 bg-black text-white py-2 rounded-lg text-xs sm:text-sm font-bold hover:bg-gray-800 transition-colors">
+            <a href="/checkout" class="disable">Checkout</a>
+          </button>
+        </div>
       </div>
-    </div>
 
     <!-- CONTENEDOR PERFIL -->
     <div class="relative">
@@ -78,6 +80,7 @@
 
   </nav>
 
+  <!-- SECCION PRODUCTOS -->
   <section>
       <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <header class="text-center">
@@ -90,11 +93,18 @@
 
         <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <li>
-            <a href="#" class="group block overflow-hidden">
+            <a href="#"
+            class="product-card group block overflow-hidden"
+            data-title="ADRIAN MILLS SHORT-SLEEVED MESH T-SHIRT"
+            data-price="$29.00"
+            data-image="https://static.bershka.net/assets/public/a8af/1083/39a0418aa0fe/5acec5ebfe61/03559734400-a4o/03559734400-a4o.jpg?ts=1782888709255&w=850"
+            data-image-back="https://static.bershka.net/assets/public/55b3/f05a/a1a749c7914c/6028760f72b3/03559734400-b/03559734400-b.jpg?ts=1782888709785&w=850"
+            data-description="Product description."
+            class="product-cart group block overflow-hidden">
             <img
                 src="https://static.bershka.net/assets/public/a8af/1083/39a0418aa0fe/5acec5ebfe61/03559734400-a4o/03559734400-a4o.jpg?ts=1782888709255&w=750"
                 alt=""
-                class="h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
+                class="cursor-pointer h-87.5 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-112.5"
             />
 
             <div class="relative bg-white pt-3">
@@ -107,14 +117,20 @@
                 <p class="mt-2">
                 <span class="sr-only"> Regular Price </span>
 
-                <span class="tracking-wider text-gray-900"> 29.00$ </span>
+                <span class="product-price tracking-wider text-gray-900"> $29.00 </span>
                 </p>
             </div>
             </a>
         </li>
 
         <li>
-            <a href="#" class="group block overflow-hidden">
+            <a href="#"
+            class="product-card group block overflow-hidden"
+            data-title="EMBROIDERED POLO NECK SWEETER"
+            data-price="22.99$"
+            data-image="https://static.bershka.net/assets/public/5d96/b4ce/a05e4a36abde/7693cb41b02d/03164376122-a4o/03164376122-a4o.jpg?ts=1783408558104&w=750"
+            data-description="Product description"
+            class="group block overflow-hidden">
             <img
                 src="https://static.bershka.net/assets/public/5d96/b4ce/a05e4a36abde/7693cb41b02d/03164376122-a4o/03164376122-a4o.jpg?ts=1783408558104&w=750"
                 alt=""
@@ -131,14 +147,20 @@
                 <p class="mt-2">
                 <span class="sr-only"> Regular Price </span>
 
-                <span class="tracking-wider text-gray-900"> 12.99$ </span>
+                <span class="tracking-wider text-gray-900"> $22.99 </span>
                 </p>
             </div>
             </a>
         </li>
 
         <li>
-            <a href="#" class="group block overflow-hidden">
+            <a href="#"
+            class="product-card group block overflow-hidden"
+            data-title="NTS X THAIBOY DIGITAL KNITTED HAT"
+            data-price="$17.99"
+            data-image="https://static.bershka.net/assets/public/859f/615d/4daa43269b15/dd8721e0d7b9/02355668800-a4o/02355668800-a4o.jpg?ts=1785328539200&w=750"
+            data-description="Product description"
+            class="group block overflow-hidden">
             <img
                 src="https://static.bershka.net/assets/public/859f/615d/4daa43269b15/dd8721e0d7b9/02355668800-a4o/02355668800-a4o.jpg?ts=1785328539200&w=750"
                 alt=""
@@ -155,14 +177,20 @@
                 <p class="mt-2">
                 <span class="sr-only"> Regular Price </span>
 
-                <span class="tracking-wider text-gray-900"> 17.99$ </span>
+                <span class="tracking-wider text-gray-900"> $17.99 </span>
                 </p>
             </div>
             </a>
         </li>
 
         <li>
-            <a href="#" class="group block overflow-hidden">
+            <a href="#" 
+            class="product-card group block overflow-hidden"
+            data-title="INTERLOOK PRINT PLUSH T-SHIRT"
+            data-price="$29.99"
+            data-image="https://static.bershka.net/assets/public/77ce/4c83/d8644b6eb1cb/8eaa78e4d11e/02544360251-a4o/02544360251-a4o.jpg?ts=1778481713669&w=750"
+            data-description="Product description"
+            class="group block overflow-hidden">
             <img
                 src="https://static.bershka.net/assets/public/77ce/4c83/d8644b6eb1cb/8eaa78e4d11e/02544360251-a4o/02544360251-a4o.jpg?ts=1778481713669&w=750"
                 alt=""
@@ -179,7 +207,7 @@
                 <p class="mt-2">
                 <span class="sr-only"> Regular Price </span>
 
-                <span class="tracking-wider text-gray-900"> 29.99$ </span>
+                <span class="tracking-wider text-gray-900"> $29.99 </span>
                 </p>
             </div>
             </a>
@@ -187,7 +215,13 @@
         </ul>
         <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <li>
-            <a href="#" class="group block overflow-hidden">
+            <a href="#" 
+            class="product-card group block overflow-hidden"
+            data-title="JEANS BARREL FIT"
+            data-price="$29.99"
+            data-image="https://static.bershka.net/assets/public/9268/6a0d/f57e4cf182f7/7a8fecd1a0ef/02581335401-a4o/02581335401-a4o.jpg?ts=1785233519035&w=750"
+            data-description="Product description"
+            class="group block overflow-hidden">
             <img
                 src="https://static.bershka.net/assets/public/9268/6a0d/f57e4cf182f7/7a8fecd1a0ef/02581335401-a4o/02581335401-a4o.jpg?ts=1785233519035&w=750"
                 alt=""
@@ -204,14 +238,21 @@
                 <p class="mt-2">
                 <span class="sr-only"> Regular Price </span>
 
-                <span class="tracking-wider text-gray-900"> 29.99$ </span>
+                <span class="tracking-wider text-gray-900"> $29.99 </span>
                 </p>
             </div>
             </a>
         </li>
 
         <li>
-            <a href="#" class="group block overflow-hidden">
+            <a href="#" 
+            class="product-card group block overflow-hidden"
+            data-title="SPIDER-MAN SHORT-SLEEVE T-SHIRT"
+            data-price="$17.99"
+            data-image="https://static.bershka.net/assets/public/e91c/c68c/1c014c498dff/95f92ecf81f4/01086222810-a4o/01086222810-a4o.jpg?ts=1771592599809&w=850"
+
+            data-description="Product description"
+            class="group block overflow-hidden">
             <img
                 src="https://static.bershka.net/assets/public/e91c/c68c/1c014c498dff/95f92ecf81f4/01086222810-a4o/01086222810-a4o.jpg?ts=1771592599809&w=850"
                 alt=""
@@ -228,14 +269,20 @@
                 <p class="mt-2">
                 <span class="sr-only"> Regular Price </span>
 
-                <span class="tracking-wider text-gray-900"> 17.99$ </span>
+                <span class="tracking-wider text-gray-900"> $17.99 </span>
                 </p>
             </div>
             </a>
         </li>
 
         <li>
-            <a href="#" class="group block overflow-hidden">
+            <a href="#" 
+            class="product-card group block overflow-hidden"
+            data-title="PRINTED BLUE HOODIE"
+            data-price="$25.99"
+            data-image="https://static.bershka.net/assets/public/d204/66df/a45646639d1a/cc190509f6f0/02947498447-a4o/02947498447-a4o.jpg?ts=1785404722882&w=750"
+            data-description="Product description"
+            class="group block overflow-hidden">
             <img
                 src="https://static.bershka.net/assets/public/d204/66df/a45646639d1a/cc190509f6f0/02947498447-a4o/02947498447-a4o.jpg?ts=1785404722882&w=750"
                 alt=""
@@ -246,20 +293,26 @@
                 <h3
                 class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
                 >
-                PRINTED HOODIE
+                PRINTED BLUE HOODIE
                 </h3>
 
                 <p class="mt-2">
                 <span class="sr-only"> Regular Price </span>
 
-                <span class="tracking-wider text-gray-900"> 25.99$ </span>
+                <span class="tracking-wider text-gray-900"> $25.99 </span>
                 </p>
             </div>
             </a>
         </li>
 
         <li>
-            <a href="#" class="group block overflow-hidden">
+            <a href="#" 
+            class="product-card group block overflow-hidden"
+            data-title="VOLUME SKATE SHOES"
+            data-price="$39.99"
+            data-image="https://static.bershka.net/assets/public/afc9/d84d/6a724b2598bc/918f61a2d5b8/12422864040-a4o/12422864040-a4o.jpg?ts=1782720603574&w=750"
+            data-description="Product description"
+            class="group block overflow-hidden">
             <img
                 src="https://static.bershka.net/assets/public/afc9/d84d/6a724b2598bc/918f61a2d5b8/12422864040-a4o/12422864040-a4o.jpg?ts=1782720603574&w=750"
                 alt=""
@@ -276,7 +329,7 @@
                 <p class="mt-2">
                 <span class="sr-only"> Regular Price </span>
 
-                <span class="tracking-wider text-gray-900"> 39.99$ </span>
+                <span class="tracking-wider text-gray-900"> $39.99 </span>
                 </p>
             </div>
             </a>
@@ -285,7 +338,71 @@
       </div>
   </section>
 
-  <footer id="page-footer" class="bg-black lg:grid lg:grid-cols-5 mt-8">
+  <!-- VENTANA DE VISTA PREVIA -->
+  <div id="product-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4">
+    
+    <!-- TARJETA DEL MODAL -->
+    <div class="relative bg-white w-full max-w-5xl rounded-xl shadow-2xl border border-black overflow-hidden flex flex-col md:flex-row max-h-[90vh]">
+      
+      <!-- Botón de Cerrar (X) estilo limpio -->
+      <button id="close-modal-btn" class="absolute top-3 right-3 z-10 bg-taupe-300 hover:bg-black hover:text-white text-black font-bold border border-black rounded-lg w-8 h-8 flex items-center justify-center transition-colors cursor-pointer">
+        ✕
+      </button>
+
+      <!-- Lado Izquierdo: Imagen del Producto-->
+      <div class="relative  flex items-center justify-center p-6 border-black">
+        
+        <!-- Flecha Izquierda (Anterior) -->
+        <button id="prev-img-btn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-black hover:text-white text-black border border-white rounded-full w-8 h-8 flex items-center justify-center transition-colors cursor-pointer shadow-md z-10">
+          ‹
+        </button>
+
+        <!-- Imagen del Producto -->
+        <img id="modal-img" alt="Product" class=" transition-all duration-300" />
+
+        <!-- Flecha Derecha (Siguiente) -->
+        <button id="next-img-btn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-black hover:text-white text-black border border-white rounded-full w-8 h-8 flex items-center justify-center transition-colors cursor-pointer shadow-md z-10">
+          ›
+        </button>
+
+      </div>
+
+      <!-- Lado Derecho: Detalles -->
+      <div class="w-full md:w-1/2 p-6 flex flex-col justify-between bg-taupe-200">
+        
+        <div>
+          <span id="modal-category" class="text-xs font-bold uppercase tracking-widest text-gray-600">NEW ARRIVAL</span>
+          <h2 id="modal-title" class="text-2xl font-bold text-black mt-1 uppercase tracking-tight">Product</h2>
+          <p id="modal-price" class="text-xl font-bold text-black mt-2">$00.00</p>
+          
+          <p id="modal-description" class="text-xs sm:text-sm text-gray-700 mt-4 leading-relaxed">
+            Product description.
+          </p>
+        </div>
+
+        <!-- Selección de Talla y Acción -->
+        <div class="mt-6 space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-black uppercase mb-2">Select size:</label>
+            <div class="flex gap-2">
+              <button class="px-3.5 py-1.5 border border-black bg-white rounded-lg text-xs font-bold hover:bg-black hover:text-white transition-colors cursor-pointer">S</button>
+              <button class="px-3.5 py-1.5 border border-black bg-white rounded-lg text-xs font-bold hover:bg-black hover:text-white transition-colors cursor-pointer">M</button>
+              <button class="px-3.5 py-1.5 border border-black bg-white rounded-lg text-xs font-bold hover:bg-black hover:text-white transition-colors cursor-pointer">L</button>
+            </div>
+          </div>
+
+          <button id="add-to-cart-btn" class="w-full bg-black hover:bg-gray-800 text-white text-sm font-bold py-3 rounded-lg shadow-md transition-all cursor-pointer">
+            Add to Cart
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="pagefooter" class="bg-black lg:grid lg:grid-cols-5 mt-8">
     <div class="relative block h-32 lg:col-span-2 lg:h-full">
       <img
         src="/media/LogoStyle4U.svg"
