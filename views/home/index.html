@@ -8,6 +8,7 @@
     <script src="../components/cart.js"></script>
     <script src="../components/profile.js"></script>
     <script src="../components/footer.js"></script>
+    <script type="module" src="./index.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/media/S4U-icon.ico">
     
     <title>Home</title>
@@ -209,8 +210,62 @@
       </div>
   </div>
 
+  <!-- MODAL DE LOGIN ADMIN -->
+  <div id="admin-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50 transition-opacity duration-300">
+    <div class="bg-white rounded-2xl p-6 sm:p-8 w-11/12 max-w-md shadow-2xl relative transform transition-all scale-95">
+      
+      <!-- Botón de Cerrar (X) -->
+      <button id="close-admin-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl font-bold p-1 transition-colors">
+        ✕
+      </button>
+
+      <!-- Encabezado -->
+      <div class="text-center mb-6">
+        <span class="inline-block bg-black text-white text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-2">
+          Administration Style4U
+        </span>
+        <h3 class="text-xl font-bold text-gray-900">Enter your admin details.</h3>
+        <p class="text-xs text-gray-500 mt-1">This log in is just for admins</p>
+      </div>
+
+      <!-- Formulario -->
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Admin Email</label>
+          <input 
+            type="email" 
+            id="admin-email" 
+            required 
+            placeholder="admin@style4u.com" 
+            class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">Password</label>
+          <input 
+            type="password" 
+            id="admin-password" 
+            required 
+            placeholder="••••••••" 
+            class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+          />
+        </div>
+
+        <!-- Texto de error -->
+        <p id="admin-error-text" class="text-xs text-red-500 font-medium text-center min-h-[16px]"></p>
+
+        <!-- Botón Ingresar -->
+        <button 
+          type="submit" 
+          class="w-full bg-black text-white text-xs font-bold uppercase tracking-wider py-3 rounded-lg hover:bg-gray-800 transition-colors shadow-md active:scale-95 duration-150">
+          Lock 'n load
+        </button>
+      </form>
+    </div>
+  </div>
+
   <footer id="footer" class="bg-black lg:grid lg:grid-cols-5 mt-8">
-   
   </footer>
 </body>
 </html>

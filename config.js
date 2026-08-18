@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const PAGE_URL = process.env.NODE_ENV === "production" 
  ? "https://style4u.onrender.com"
  : "http://localhost:3005";

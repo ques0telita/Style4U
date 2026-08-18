@@ -219,7 +219,7 @@ const createPageFooter = () => {
           </ul>
 
           <p class="mt-8 text-xs text-gray-500 sm:mt-0 dark:text-gray-400">
-            &copy; 2022. Company Name. All rights reserved.
+            <a href="#" id="admin-portal-link">[admin portal]</a>
           </p>
         </div>
       </div>
@@ -227,5 +227,14 @@ const createPageFooter = () => {
   `;
 };
 
+
+// Verificamos si estamos en la página principal
+const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+// Solo incluimos la etiqueta del admin si estamos en el Home
+const adminLinkHTML = isHomePage 
+  ? `<a href="#" id="admin-portal-link" class="hover:underline">[admin portal]</a>` 
+  : '';
+  
 // Esperar a que todo el HTML esté cargado en el navegador antes de ejecutar
 document.addEventListener('DOMContentLoaded', createPageFooter);

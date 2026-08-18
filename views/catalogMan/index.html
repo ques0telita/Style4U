@@ -12,6 +12,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/media/S4U-icon.ico">
     <title>Catalog</title>
 </head>
+
 <body class="bg-white-50">
 
   <!-- NAVBAR -->
@@ -344,6 +345,12 @@
       </div>
   </section>
 
+  <div class="flex justify-center my-4">
+  <button id="add-product-btn" class="hidden bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-800 transition">
+    + Add Product
+  </button>
+  </div>
+
   <!-- VENTANA DE VISTA PREVIA -->
   <div id="product-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4">
     
@@ -407,8 +414,32 @@
     </div>
   </div>
 
+  <!-- Modal para Agregar Producto -->
+  <div id="add-product-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4">
+    <div class="bg-white p-6 rounded-lg w-full max-w-md relative">
+      <button id="close-product-modal" class="absolute top-3 right-3 text-gray-500 hover:text-black font-bold text-xl">&times;</button>
+      <h2 class="text-xl font-bold mb-4">Add new product</h2>
+      
+      <form id="add-product-form" class="flex flex-col gap-3">
+        <input type="text" id="product-name" placeholder="Product name" required class="border p-2 rounded" />
+        <input type="number" id="product-price" placeholder="Price" step="0.01" required class="border p-2 rounded" />
+        <input type="text" id="product-image" placeholder="Image URL" required class="border p-2 rounded" />
+
+        <select id="product-category" class="border p-2 rounded">
+          <option value="man">Man</option>
+          <option value="woman">Woman</option>
+        </select>
+
+        <button type="submit" class="bg-black text-white py-2 rounded font-bold hover:bg-gray-800 transition">
+          Safe Product
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer id="footer" class="bg-black lg:grid lg:grid-cols-5 mt-8">
   </footer>
+
 </body>
 </html>

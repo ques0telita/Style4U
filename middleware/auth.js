@@ -17,4 +17,12 @@ const userExtractor = async (req, res, next) => {
     next();
 };
 
+const adminExtractor = (req, res, next) => {
+  // req.user viene del userExtractor previo
+  if (!req.user || req.user.role !== 'admin') {
+    return res.status(403).json({ error: 'Access denied. Admins only.' });
+  }
+  next();
+};
+
 module.exports = { userExtractor };

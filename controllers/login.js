@@ -14,15 +14,16 @@ loginRouter.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Invalid email or password' });
     }
 
-    // 2. Comparamos la contraseña ingresada con la contraseña encriptada (hash)
+    // 2. Comparamos la contraseña ingresada con el hash
     const isCorrect = await bcrypt.compare(password, userExist.passwordHash);
     if (!isCorrect) {
       return res.status(400).json({ error: 'Invalid email or password' });
     }
 
-    // 3. Creamos la información que guarda en el token (payload)
+    // 3. 👈 CAMBIO 1: Incluimos el ROL en la información del token
     const userForToken = {
-      id: userExist._id
+      id: userExist._id,
+      role: userExist.role || 'user'
     };
 
     // 4. Firmamos el token con la clave secreta
@@ -32,20 +33,28 @@ loginRouter.post('/', async (req, res) => {
       { expiresIn: '1d' }
     );
 
-    // 5. Guardamos el token en una cookie del navegador
+    // 5. Guardamos el token en la cookie
     res.cookie('accessToken', accessToken, {
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24), // expira en 1 día 
       secure: process.env.NODE_ENV === 'production',
-      httpOnly: true // seguridad para que no sea leída por JS en el navegador
+      httpOnly: true
     });
 
-    return res.status(200).json({ message: 'Success' });
+    // 👈 CAMBIO 2: Retornamos los datos básicos del usuario para usarlos en el frontend
+    return res.status(200).json({ 
+      message: 'Success',
+      user: {
+        id: userExist._id,
+        email: userExist.email,
+        name: userExist.name,
+        role: userExist.role || 'user'
+      }
+    });
 
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 });
-
 
 module.exports = loginRouter;

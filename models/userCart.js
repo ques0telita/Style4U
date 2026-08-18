@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userCartSchema = new mongoose.Schema({
-  // 👤 Relación inversa apuntando al Usuario:
+  // relación inversa apuntando al Usuario:
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
