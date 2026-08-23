@@ -27,15 +27,48 @@
 
 const cartRouter = require('express').Router();
 const { userExtractor } = require('../middleware/auth');
+const UserCart = require('../models/userCart');
 
-// Esta ruta responde a GET /api/cart
+// GET /api/cart - Fetch user's cart items
 cartRouter.get('/', userExtractor, async (req, res) => {
-  // req.user ya debería ser inyectado por userExtractor
-  if (!req.user) {
-    return res.status(401).json({ error: 'token missing or invalid' });
-  }
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Token missing or invalid' });
+    }
 
-  return res.status(200).json({ cart: req.user.cart || [] });
+    let userCart = await UserCart.findOne({ user: req.user._id });
+    if (!userCart) {
+      userCart = new UserCart({ user: req.user._id, items: [] });
+      await userCart.save();
+    }
+
+    return res.status(200).json({ cart: userCart.items || [] });
+  } catch (error) {
+    return res.status(500).json({ error: 'Error fetching cart', details: error.message });
+  }
+});
+
+// POST /api/cart - Sync or save user's cart items
+cartRouter.post('/', userExtractor, async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Token missing or invalid' });
+    }
+
+    const { items } = req.body;
+    let userCart = await UserCart.findOne({ user: req.user._id });
+
+    if (!userCart) {
+      userCart = new UserCart({ user: req.user._id, items: items || [] });
+    } else {
+      userCart.items = items || [];
+    }
+
+    await userCart.save();
+    return res.status(200).json({ cart: userCart.items });
+  } catch (error) {
+    return res.status(500).json({ error: 'Error saving cart', details: error.message });
+  }
 });
 
 module.exports = cartRouter;

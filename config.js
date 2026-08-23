@@ -1,3 +1,8 @@
+const dns = require('dns');
+try {
+  dns.setServers(['1.1.1.1', '8.8.8.8']);
+} catch (e) {}
+
 require('dotenv').config();
 
 const PAGE_URL = process.env.NODE_ENV === "production" 
@@ -9,5 +14,3 @@ const MONGO_URI = process.env.NODE_ENV === "production"
  : process.env.MONGO_URI_TEST;
 
 module.exports = { PAGE_URL, MONGO_URI };
-
-// 74.220.48.0/24

@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminBtn = e.target.closest('#admin-portal-link');
 
     if (adminBtn) {
-      e.preventDefault(); // Evitamos que la página salte arriba con '#'
-      
+      e.preventDefault();
       const adminModal = document.getElementById('admin-modal');
       if (adminModal) {
         adminModal.classList.remove('hidden');
@@ -23,46 +22,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 2. Cerrar el modal si hacen clic en la zona oscura fuera del recuadro
+  // 2. Cerrar el modal si hacen clic en el fondo oscuro
   window.addEventListener('click', (e) => {
     const adminModal = document.getElementById('admin-modal');
     if (e.target === adminModal) {
       adminModal.classList.add('hidden');
     }
   });
-});
 
-// Manejador del submit del formulario de Admin Modal
-const adminForm = document.getElementById('admin-modal-form'); // Asegúrate de que tu <form> tenga este ID
+  // 3. Manejador del formulario de Admin
+  const adminForm = document.getElementById('admin-login-form') || document.getElementById('admin-modal-form');
+  const errorText = document.getElementById('admin-error-text');
 
-if (adminForm) {
-  adminForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const email = document.getElementById('admin-email').value;
-    const password = document.getElementById('admin-password').value;
-
-    try {
-      const response = await axios.post('/api/login', { email, password }, { withCredentials: true });
+  if (adminForm) {
+    adminForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (errorText) errorText.textContent = '';
       
-      if (response.data.user && response.data.user.role === 'admin') {
-        // Guardamos la bandera de admin para el frontend
-        localStorage.setItem('isAdmin', 'true');
-        alert('Youre now in admin mode');
-        window.location.href = '/'; 
-      } else {
-        alert('You log in, but you dont have admin access.');
+      const email = document.getElementById('admin-email')?.value;
+      const password = document.getElementById('admin-password')?.value;
+
+      if (!email || !password) {
+        if (errorText) errorText.textContent = 'Please enter email and password.';
+        return;
       }
-    } catch (error) {
-      console.error(error);
-      alert('Incorrect email or password');
-    }
-  });
-}
-// Después de hacer axios.post('/api/login', ...)
-if (response.data.role === 'admin' || response.data.user?.role === 'admin') {
-  // 👈 Esta línea es la que falta para que aparezca en tus DevTools:
-  localStorage.setItem('isAdmin', 'true'); 
-  
-  window.location.href = '/catalogMan/';
-}
+
+      try {
+        const response = await axios.post('/api/login', { email, password }, { withCredentials: true });
+        
+        if (response.data?.user?.role === 'admin' || response.data?.role === 'admin') {
+          localStorage.setItem('isAdmin', 'true');
+          alert('Admin mode activated.');
+          window.location.href = '/catalogMan'; 
+        } else {
+          localStorage.removeItem('isAdmin');
+          if (errorText) {
+            errorText.textContent = 'Logged in successfully, but this account is not an admin.';
+          } else {
+            alert('Logged in successfully, but this account is not an admin.');
+          }
+        }
+      } catch (error) {
+        console.error('Admin login error:', error);
+        const msg = error.response?.data?.error || 'Incorrect email or password';
+        if (errorText) {
+          errorText.textContent = msg;
+        } else {
+          alert(msg);
+        }
+      }
+    });
+  }
+});

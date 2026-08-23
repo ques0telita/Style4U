@@ -1,6 +1,6 @@
-import { setupAdminUI } from '../components/adminCatalog.js';
+import { setupAdminUI, isAdmin } from '../components/adminCatalog.js';
 
-// Variables globales para el carrusel de fotos del modal
+// Variables globales para el modal
 let currentImages = [];
 let currentImageIndex = 0;
 
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addProductForm = document.getElementById("add-product-form");
   const sizeBtns = document.querySelectorAll(".size-btn");
 
-  // Manejo de Selección de Tallas (S, M, L)
+  // Manejo de Selección de Tallas en modal de agregar producto
   let selectedSizes = [];
   sizeBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -44,18 +44,22 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.onerror = (error) => reject(error);
   });
 
-  // Cambiar foto frontal/trasera en el Modal de Vista Previa
+  // Cambiar foto en el Modal
   function toggleImage() {
-    if (currentImages.length === 0) return;
+    if (currentImages.length <= 1) return;
     currentImageIndex = currentImageIndex === 0 ? 1 : 0;
-    if (modalImg) modalImg.src = currentImages[currentImageIndex];
+    if (modalImg && currentImages[currentImageIndex]) {
+      modalImg.src = currentImages[currentImageIndex];
+    }
   }
 
   if (prevBtn) prevBtn.addEventListener("click", toggleImage);
   if (nextBtn) nextBtn.addEventListener("click", toggleImage);
 
   if (closeModalBtn) {
-    closeModalBtn.addEventListener("click", () => productModal.classList.add("hidden"));
+    closeModalBtn.addEventListener("click", () => {
+      if (productModal) productModal.classList.add("hidden");
+    });
   }
 
   // Controles para abrir/cerrar modal de Agregar Producto
@@ -87,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const category = window.location.pathname.includes("catalogWoman") ? "woman" : "man";
+      const category = "woman";
 
       try {
         await axios.post(
@@ -97,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
             price: Number(price),
             image: finalImage,
             category,
-            sizes: selectedSizes,
+            sizes: selectedSizes.length > 0 ? selectedSizes : ['S', 'M', 'L'],
             description: "High quality apparel."
           },
           { withCredentials: true }
@@ -110,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedSizes = [];
         sizeBtns.forEach((btn) => btn.classList.remove("bg-black", "text-white"));
 
-        renderProducts(); // Recarga la lista dinámicamente sin necesidad de f5
+        renderProducts();
       } catch (error) {
         console.error(error);
         alert("Error saving the product");
@@ -124,25 +128,25 @@ async function renderProducts() {
   const container = document.getElementById("products-container");
   if (!container) return;
 
-  const category = window.location.pathname.includes("catalogWoman") ? "woman" : "man";
-
   try {
-    const response = await axios.get(`/api/products?category=${category}`);
+    const response = await axios.get('/api/products?category=woman');
     const products = response.data;
+    const adminActive = isAdmin();
 
     container.innerHTML = products.map(product => `
       <li class="relative group">
         <button 
-          class="delete-btn hidden absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center z-20 font-bold text-xs hover:bg-red-700" 
-          data-id="${product._id}">
+          class="delete-btn ${adminActive ? '' : 'hidden'} absolute top-3 right-3 bg-red-600 hover:bg-red-700 text-white rounded-full w-7 h-7 flex items-center justify-center z-20 font-bold text-sm transition-all duration-200 cursor-pointer shadow-md hover:scale-110" 
+          data-id="${product._id}"
+          title="Delete product">
           &times;
         </button>
 
         <a href="#"
-           class="product-card block overflow-hidden"
+           class="product-card group block overflow-hidden cursor-pointer"
            data-id="${product._id}"
            data-title="${product.title}"
-           data-price="$${product.price}"
+           data-price="$${typeof product.price === 'number' ? product.price.toFixed(2) : product.price}"
            data-image="${product.image}"
            data-image-back="${product.imageBack || product.image}"
            data-description="${product.description || 'Product description.'}">
@@ -160,7 +164,7 @@ async function renderProducts() {
 
             <p class="mt-2">
               <span class="sr-only">Regular Price</span>
-              <span class="tracking-wider text-gray-900">$${product.price}</span>
+              <span class="product-price tracking-wider text-gray-900">$${typeof product.price === 'number' ? product.price.toFixed(2) : product.price}</span>
             </p>
           </div>
         </a>
@@ -168,56 +172,25 @@ async function renderProducts() {
     `).join("");
 
     setupAdminUI();
-    attachCardEvents();
 
   } catch (error) {
-    console.error("Error cargando productos:", error);
+    console.error("Error loading products:", error);
   }
-}
-
-// Re-conectar eventos de clic en las tarjetas de productos renderizadas
-function attachCardEvents() {
-  const productCards = document.querySelectorAll(".product-card");
-  productCards.forEach((card) => {
-    card.addEventListener("click", (e) => {
-      if (e.target.classList.contains("delete-btn")) return;
-
-      e.preventDefault();
-      const title = card.dataset.title;
-      const price = card.dataset.price;
-      const frontImg = card.dataset.image;
-      const backImg = card.dataset.imageBack || frontImg;
-      const description = card.dataset.description;
-
-      const modalImg = document.getElementById("modal-img");
-      const modalTitle = document.getElementById("modal-title");
-      const modalPrice = document.getElementById("modal-price");
-      const modalDescription = document.getElementById("modal-description");
-      const productModal = document.getElementById("product-modal");
-
-      currentImages = [frontImg, backImg];
-      currentImageIndex = 0;
-
-      if (modalImg) modalImg.src = frontImg;
-      if (modalTitle) modalTitle.textContent = title;
-      if (modalPrice) modalPrice.textContent = price;
-      if (modalDescription) modalDescription.textContent = description;
-
-      if (productModal) productModal.classList.remove("hidden");
-    });
-  });
 }
 
 // --- DELEGACIÓN DE EVENTOS DE ELIMINACIÓN ---
 document.addEventListener("click", async (e) => {
-  if (e.target.classList.contains("delete-btn")) {
-    const productId = e.target.getAttribute("data-id");
+  const deleteBtn = e.target.closest(".delete-btn");
+  if (deleteBtn) {
+    e.preventDefault();
+    e.stopPropagation();
+    const productId = deleteBtn.getAttribute("data-id");
 
     if (confirm("Do you really want to delete this product?")) {
       try {
         await axios.delete(`/api/products/${productId}`, { withCredentials: true });
         alert("Product deleted.");
-        renderProducts(); // Vuelve a pintar los productos en tiempo real sin recargar
+        renderProducts();
       } catch (error) {
         console.error(error);
         alert("Failed to delete product.");

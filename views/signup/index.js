@@ -1,9 +1,8 @@
 import { createNotification } from "../components/notification.js";
 
-const REGEX_PASSWORD = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$/;
-const REGEX_USERNAME = /^[a-zA-Z0-9_]{3,16}$/;
-const REGEX_PHONE = /^(\+?\d{1,3})?(\d{7,12})$/;
-const REGEX_EMAIL = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+const REGEX_PASSWORD = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+const REGEX_NAME = /^[a-zA-ZÀ-ÿ\s]{2,40}$/;
+const REGEX_EMAIL = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const form = document.getElementById("form");
 const nameInput = document.getElementById("name-input");
@@ -12,136 +11,121 @@ const passwordInput = document.getElementById("password-input");
 const matchInput = document.getElementById("match-input");
 const formBtn = document.getElementById("form-btn");
 const notification = document.getElementById("notification");
-const information = document.querySelectorAll("#information");
 
-// validations
+// Validations
 let nameValidation = false;
 let emailValidation = false;
 let passwordValidation = false;
 let matchValidation = false;
 
-information.forEach((info) => {
-  info.classList.add("hidden");
-});
-
-const validation = (input, regexValidation, informationElement) => {
+const validation = (input, isValid) => {
+  if (!input) return;
   if (input.value === "") {
     input.classList.remove("outline-red-500", "outline-2", "outline");
     input.classList.remove("outline-green-500", "outline-2", "outline");
-    if (informationElement) informationElement.classList.add("hidden");
     input.classList.add("focus:outline-indigo-700");
-  } else if (!regexValidation) {
+  } else if (!isValid) {
     input.classList.remove("focus:outline-indigo-700");
-    if (informationElement) informationElement.classList.remove("hidden");
+    input.classList.remove("outline-green-500");
     input.classList.add("outline-red-500", "outline-2", "outline");
   } else {
-    input.classList.remove("outline-red-500", "outline-2", "outline");
-    if (informationElement) informationElement.classList.add("hidden");
+    input.classList.remove("outline-red-500");
     input.classList.add("outline-green-500", "outline-2", "outline");
   }
 
-  formBtn.disabled =
-    nameValidation && emailValidation && passwordValidation && matchValidation
-      ? false
-      : true;
+  if (formBtn) {
+    formBtn.disabled = !(nameValidation && emailValidation && passwordValidation && matchValidation);
+  }
 };
 
-// events
-nameInput.addEventListener("input", (e) => {
-  nameValidation = REGEX_USERNAME.test(nameInput.value);
-  validation(nameInput, nameValidation, information[0]);
-});
+// Events
+if (nameInput) {
+  nameInput.addEventListener("input", () => {
+    nameValidation = REGEX_NAME.test(nameInput.value.trim());
+    validation(nameInput, nameValidation);
+  });
+}
 
-emailInput.addEventListener("input", (e) => {
-  emailValidation = REGEX_EMAIL.test(emailInput.value);
-  validation(emailInput, emailValidation, information[1]);
-});
+if (emailInput) {
+  emailInput.addEventListener("input", () => {
+    emailValidation = REGEX_EMAIL.test(emailInput.value.trim());
+    validation(emailInput, emailValidation);
+  });
+}
 
-passwordInput.addEventListener("input", (e) => {
-  passwordValidation = REGEX_PASSWORD.test(passwordInput.value);
-  matchValidation = e.target.value === matchInput.value;
-  validation(passwordInput, passwordValidation, information[2]);
-  validation(matchInput, matchValidation, information[3]);
-});
+if (passwordInput) {
+  passwordInput.addEventListener("input", () => {
+    passwordValidation = REGEX_PASSWORD.test(passwordInput.value);
+    matchValidation = passwordInput.value === matchInput.value && matchInput.value !== "";
+    validation(passwordInput, passwordValidation);
+    validation(matchInput, matchValidation);
+  });
+}
 
-matchInput.addEventListener("input", (e) => {
-  matchValidation = e.target.value === passwordInput.value;
-  validation(matchInput, matchValidation, information[3]);
-});
+if (matchInput) {
+  matchInput.addEventListener("input", () => {
+    matchValidation = matchInput.value === passwordInput.value && matchInput.value !== "";
+    validation(matchInput, matchValidation);
+  });
+}
 
 // EVENTO PRINCIPAL DEL FORMULARIO
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  
-  // Desactivar el botón inmediatamente para evitar doble clic
-  formBtn.disabled = true;
-  const originalBtnText = formBtn.innerHTML;
-  formBtn.innerHTML = "Sending..."; 
-
-  console.log("Sending form...");
-  
-  try {
-    const newUser = {
-      name: nameInput.value,
-      email: emailInput.value,
-      password: passwordInput.value,
-    };
-
-    // Envía los datos al backend en Node.js
-    const { data } = await axios.post("/api/users", newUser);
-    console.log("Respuesta del servidor:", data);
-
-    // --- EVALUAMOS LA REDIRECCIÓN DE FORMA CORRECTA ---
-    // Como data ahora contiene el objeto { message: "..." }, revisamos data.message
-    if (data && data.message === "User created successfuly.") {
-      
-      createNotification(false, "Your account has been verified!");
-      
-      // Esperamos un momento breve para que el usuario logre leer la notificación antes de irse
-      setTimeout(() => {
-        window.location.href = "../login/index.html"; 
-      }, 1500);
-
-    } else {
-      // Flujo tradicional si requiere validación manual por Nodemailer
-      createNotification(false, data);
-      setTimeout(() => {
-        notification.classList.add("hidden");
-      }, 5000);
-
-      // Resetear valores de los inputs solo si no redirige de inmediato
-      nameInput.value = "";
-      emailInput.value = "";
-      passwordInput.value = "";
-      matchInput.value = "";
-
-      // Resetear las variables de control
-      nameValidation = false;
-      emailValidation = false;
-      passwordValidation = false;
-      matchValidation = false;
-
-      // Limpiar estilos visuales de Tailwind volviendo al estado inicial vacío
-      validation(nameInput, false);
-      validation(emailInput, false);
-      validation(passwordInput, false);
-      validation(matchInput, false);
-    }
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
     
-  } catch (error) {
-    // Si el backend lanza un error (400), se captura aquí:
-    console.error("Error capturado:", error);
-    const errorMsg = error.response && error.response.data && error.response.data.error 
-      ? error.response.data.error 
-      : "Hubo un error interno.";
-      
-    createNotification(true, errorMsg);
-    setTimeout(() => {
-      notification.classList.add("hidden");
-    }, 5000);
+    if (!formBtn) return;
+    formBtn.disabled = true;
+    const originalBtnText = formBtn.innerHTML;
+    formBtn.innerHTML = "Creating account..."; 
 
-    // Reactivar el botón para que pueda corregir sus datos
-    formBtn.disabled = false;
-    formBtn.innerHTML = originalBtnText;
-  }
-});
+    try {
+      const newUser = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        password: passwordInput.value,
+      };
+
+      const { data } = await axios.post("/api/users", newUser);
+
+      if (data && (data.verified || (data.message && data.message.includes("successfully")))) {
+        createNotification(false, "Your account has been created and verified successfully!");
+        
+        setTimeout(() => {
+          window.location.href = "/login"; 
+        }, 1500);
+      } else {
+        const msg = typeof data === 'string' ? data : (data.message || "Account created. Please check your email to verify.");
+        createNotification(false, msg);
+        
+        // Reset inputs
+        nameInput.value = "";
+        emailInput.value = "";
+        passwordInput.value = "";
+        matchInput.value = "";
+
+        nameValidation = false;
+        emailValidation = false;
+        passwordValidation = false;
+        matchValidation = false;
+
+        validation(nameInput, false);
+        validation(emailInput, false);
+        validation(passwordInput, false);
+        validation(matchInput, false);
+
+        formBtn.innerHTML = originalBtnText;
+        formBtn.disabled = true;
+      }
+      
+    } catch (error) {
+      console.error("Signup error:", error);
+      const errorMsg = error.response?.data?.error || "An error occurred during registration. Please try again.";
+        
+      createNotification(true, errorMsg);
+
+      formBtn.disabled = false;
+      formBtn.innerHTML = originalBtnText;
+    }
+  });
+}
