@@ -18,7 +18,7 @@ const createAdminUser = async () => {
       console.log('✅ This user is alredy created passing to admin rol.');
     } else {
       // Si no existe, lo creamos desde cero
-      const passwordHash = await bcrypt.hash('Sebastian123', 10);
+      const passwordHash = await bcrypt.hash('Password123.', 10);
       const adminUser = new User({
         name: 'Admin',
         email: adminEmail,
