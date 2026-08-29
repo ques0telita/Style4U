@@ -12,11 +12,10 @@ const createAdminUser = async () => {
     const existingUser = await User.findOne({ email: adminEmail });
 
     if (existingUser) {
-      // Si el usuario ya existe, actualizamos el rol a admin Y reseteamos la contraseña
+      // Si el usuario ya existe, solo le actualizamos el rol a admin
       existingUser.role = 'admin';
-      existingUser.passwordHash = await bcrypt.hash('Password123.', 10);
       await existingUser.save();
-      console.log('✅ This user already exists — role set to admin and password reset to Password123.');
+      console.log('✅ This user is alredy created passing to admin rol.');
     } else {
       // Si no existe, lo creamos desde cero
       const passwordHash = await bcrypt.hash('Password123.', 10);
